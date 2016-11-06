@@ -1,4 +1,4 @@
-> 2009年，W3C提出了一种新的方案 ---- Flex布局，可以简便、完整、响应式地实现各种页面布局。目前所有浏览器都逐渐支持Flex布局，同时一些native的开发，可以基于flex的标准来实现UI布局的，如react native, weex等
+> 2009年，W3C提出了一种新的方案 ---- Flex布局，可以简便、完整、响应式地实现各种页面布局。目前所有浏览器都逐渐支持Flex布局，同时一些native的开发，也是基于flex的标准来实现UI布局的，如react native, weex等。所以Flex布局将成为未来布局的首选方案。
 
 ### Version History
 
@@ -24,4 +24,3 @@ Broken up by "version" of flexbox:
 | Chrome                 | Safari                   | Firefox                 | Opera       | IE                        | Android                  | iOS                      |
 | ---------------------- | ------------------------ | ----------------------- | ----------- | ------------------------- | ------------------------ | ------------------------ |
 | 20- (old)<br>21+ (new) | 3.1+ (old)<br>6.1+ (new) | 2-21 (old)<br>22+ (new) | 12.1+ (new) | 10 (tweener)<br>11+ (new) | 2.1+ (old)<br>4.4+ (new) | 3.2+ (old)<br>7.1+ (new) |
-
