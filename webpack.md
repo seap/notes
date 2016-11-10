@@ -5,6 +5,14 @@
 
 ###[devtool](http://webpack.github.io/docs/configuration.html#devtool)
 
+**entry**: 指定打包的入口文件，每有一个键值对，就是一个入口文件。
+**output**：配置打包结果，path定义了输出的文件夹，filename则定义了打包结果文件的名称，filename里面的[name]会由entry中的键替换,例子中的/build/bundle.js便是生成的文件。
+**resolve**：定义了解析模块路径时的配置，常用的就是extensions，可以用来指定模块的后缀，这样在引入模块时就不需要写后缀了，会自动补全.
+**module**：定义了对模块的处理逻辑，这里可以用loaders定义了一系列的加载器，以及一些正则。当需要加载的文件匹配test的正则时，就会进行处理。这里我们使用了react-hot 和 babel。babel-loader是我们使用ES-6进行开发时用于生成JS文件。
+最后我们生成了一个style.css仅仅做个例子，告诉我们如何引入样式文件，实际上我们可以加载诸如sass-loader这样的加载器。
+**loader**:对文件进行处理，这正是webpack强大的原因。比如定义了凡是.js结尾的文件都是用babel-loader做处理，而.jsx结尾的文件会先经过jsx-loader处理，然后经过babel-loader处理。当然这些loader也需要通过npm install安装。
+**plugins**: 这里定义了需要使用的插件，比如commonsPlugin在打包多个入口文件时会提取出公用的部分，生成common.js。
+
 
 ##webpack-dev-middleware
 对于 `webpack-dev-middleware`，最直观简单的理解就是一个运行于内存中的文件系统。你定义了 `webpack.config`，webpack 就能据此梳理出所有模块的关系脉络，而 `webpack-dev-middleware` 就在此基础上形成一个微型的文件映射系统，每当应用程序请求一个文件——比如说你定义的某个`entry` ，它匹配到了就把内存中缓存的对应结果作为文件内容返回给你，反之则进入到下一个中间件。
@@ -41,10 +49,17 @@ koaApp.use(async (context, next) => {
 
 官方推荐了一个现成的封装 [koa-webpack-middleware](https://github.com/leecade/koa-webpack-middleware) webpack-dev-middleware for koa2 with HMR(hot module replacement) supports.
 
-##webpack-isomorphic-tools
-为了解决在 Node.js 中无法 require 静态资源的问题，引入了
-[webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)
+##[webpack-isomorphic-tools](https://github.com/halt-hammerzeit/webpack-isomorphic-tools)
+为了解决在 Node.js 中无法 require 静态资源的问题，引入了webpack-isomorphic-tools
+
+1. 以webpack插件的形式，预编译sass, less，图片文件、字体文件等，将其转换为一个 `assets.json` 文件保存到项目目录下。
+2. require hook，所有less文件的引入，代理到生成的 JSON 文件中，匹配文件路径，返回一个预先编译好的 JSON 对象。
+
 在 webpack 编译前端代码时，将资源文件进行映射，存储在一个 JSON 文件中，然后 Node.js Server 找到该文件， hack Node.js 的 require 语句
+
+http://www.aliued.com/?p=3077
+
+
 
 ##webpack plugins
 [webpack plugins list](https://github.com/webpack/docs/wiki/list-of-plugins)
