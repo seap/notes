@@ -6,7 +6,20 @@
 ###[devtool](http://webpack.github.io/docs/configuration.html#devtool)
 
 **entry**: 指定打包的入口文件，每有一个键值对，就是一个入口文件。
-**output**：配置打包结果，path定义了输出的文件夹，filename则定义了打包结果文件的名称，filename里面的[name]会由entry中的键替换,例子中的/build/bundle.js便是生成的文件。
+###output###
+配置打包结果，path定义了输出的文件夹，filename则定义了打包结果文件的名称，filename里面的[name]会由entry中的键替换,例子中的/build/bundle.js便是生成的文件。
+
+`output.chunkFilename`用于配置按需加载，是未被列在`entry`中，却又需要被打包出来的文件命名配置
+
+```
+require.ensure([], require => callback(null, require('./container/Page').default), 'page')
+```
+
+异步加载的模块是要以文件形式加载，所以这时生成的文件名是以`chunkname`配置的，生成出的文件名就是`page.min.js`
+
+`require.ensure()` API的第三个参数是给这个模块命名，否则 `chunkFilename: "[name].min.js"` 中的 `[name]` 是一个自动分配的、可读性很差的id。参见：[named chunk](http://webpack.github.io/docs/code-splitting.html#named-chunks)
+
+
 **resolve**：定义了解析模块路径时的配置，常用的就是extensions，可以用来指定模块的后缀，这样在引入模块时就不需要写后缀了，会自动补全.
 **module**：定义了对模块的处理逻辑，这里可以用loaders定义了一系列的加载器，以及一些正则。当需要加载的文件匹配test的正则时，就会进行处理。这里我们使用了react-hot 和 babel。babel-loader是我们使用ES-6进行开发时用于生成JS文件。
 最后我们生成了一个style.css仅仅做个例子，告诉我们如何引入样式文件，实际上我们可以加载诸如sass-loader这样的加载器。
