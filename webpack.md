@@ -19,6 +19,18 @@ require.ensure([], require => callback(null, require('./container/Page').default
 
 `require.ensure()` API的第三个参数是给这个模块命名，否则 `chunkFilename: "[name].min.js"` 中的 `[name]` 是一个自动分配的、可读性很差的id。参见：[named chunk](http://webpack.github.io/docs/code-splitting.html#named-chunks)
 
+```
+// air project
+output: {
+    path: path.resolve(rootDir, 'public/dist'),
+    filename: '[name].[chunkhash:8].js',
+    chunkFilename: '[name].[chunkhash:8].js',
+    publicPath: `http://${host}:${port}/static/`
+},
+```
+
+
+
 
 **resolve**：定义了解析模块路径时的配置，常用的就是extensions，可以用来指定模块的后缀，这样在引入模块时就不需要写后缀了，会自动补全.
 **module**：定义了对模块的处理逻辑，这里可以用loaders定义了一系列的加载器，以及一些正则。当需要加载的文件匹配test的正则时，就会进行处理。这里我们使用了react-hot 和 babel。babel-loader是我们使用ES-6进行开发时用于生成JS文件。
