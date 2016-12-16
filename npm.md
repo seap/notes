@@ -2,8 +2,6 @@
 
 # npm 基本用法和实用技巧
 
-<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:0 orderedList:0 -->
-
 - [基本用法](#基本用法)
   - [安装与升级](#安装与升级)
     - [安装](#安装)
@@ -25,7 +23,7 @@
     - [npm conifg](#npm-conifg)
 - [工作原理](#工作原理)
 - [实用技巧](#实用技巧)
-  - [pacakge.json](#pacakgejson)
+  - [package.json](#package.json)
     - [dependencies](#dependencies)
     - [optionalDependencies](#optionaldependencies)
     - [peerDependencies](#peerdependencies)
@@ -68,46 +66,46 @@ npm install npm@2 -g
 
 #### npm install
 
-1. 根据 `package.json` 文件安装依赖。
+1.  根据 `package.json` 文件安装依赖。
 
-    ```
-    npm install
-    ```
+     ```
+     npm install
+     ```
 
-2. 安装指定的依赖包。
+2.  安装指定的依赖包。
 
-    ```
-    npm install [<@scope>/]<pkg>
-    ```
+     ```
+     npm install [<@scope>/]<pkg>
+     ```
 
     > 如果当前目录中存在 `package.json` 文件，则安装满足文件中版本规则的最高版本；否则安装最新版本依赖包。
 
-3. 安装指定版本的依赖包。
+3.  安装指定版本的依赖包。
 
-    ```
-    npm install [<@scope>/]<pkg>@<tag>
-    npm install [<@scope>/]<pkg>@<version>
-    npm install [<@scope>/]<pkg>@<version range>
-    ```
+     ```
+     npm install [<@scope>/]<pkg>@<tag>
+     npm install [<@scope>/]<pkg>@<version>
+     npm install [<@scope>/]<pkg>@<version range>
+     ```
 
-4. 从本地位置安装依赖。
+4.  从本地位置安装依赖。
 
-    ```
-    npm install <folder>
-    npm install <tarball file>
-    ```
+     ```
+     npm install <folder>
+     npm install <tarball file>
+     ```
 
     > 可以用 `npm pack` 生成 `<tarball file>`
 
-5. 从网络位置安装依赖。
+5.  从网络位置安装依赖。
 
-    ```
-    npm install <tarball url>
-    npm install <git:// url>
-    npm install <github username>/<github project>
-    ```
+     ```
+     npm install <tarball url>
+     npm install <git:// url>
+     npm install <github username>/<github project>
+     ```
 
-6. 常用参数：
+6.  常用参数：
 
     - `-g, --global`：安装全局依赖，如果没有指定依赖包名，则将当前目录中的包安装至全局
 
@@ -120,7 +118,13 @@ npm install npm@2 -g
     - `--only={dev[elopment]|prod[uction]}`：无视 `NODE_ENV`，只安装 `devDependencies` 或仅安装除了 `devDependencies` 之外的依赖项
     - `--dry-run`：走一遍安装的过程并报告结果，但实际上没有安装任何依赖
 
-7. 别名：`i`
+7.  别名：`i`
+
+    ```
+    npm i react
+    ```
+
+    ​
 
 #### npm uninstall
 
@@ -136,30 +140,30 @@ npm install npm@2 -g
 
 #### npm update
 
-1. 升级所有依赖包至版本规则允许的最新版本，并安装缺失的依赖包
+1.  升级所有依赖包至版本规则允许的最新版本，并安装缺失的依赖包
 
-    ```
-    npm update [<pkg>...]
-    ```
+     ```
+     npm update [<pkg>...]
+     ```
 
-2. 常用参数：
+2.  常用参数：
 
     - `-g`：升级全局依赖包
     - `--dev`：同时升级在 `devDependencies` 中的依赖包
     - `--depth Infinity`：从 `npm@2.6.1` 起 `npm update` 默认仅升级顶层依赖，使用该参数升级所有依赖包
     - `--save`：升级依赖包，同时记录升级后的版本
 
-3. 别名：`up`、`upgrade`
+3.  别名：`up`、`upgrade`
 
 #### npm ls
 
-1. 以树形结构打印依赖包及其版本
+1.  以树形结构打印依赖包及其版本
 
-    ```
-    npm ls [[<@scope>/]<pkg> ...]
-    ```
+     ```
+     npm ls [[<@scope>/]<pkg> ...]
+     ```
 
-2. 常用参数：
+2.  常用参数：
 
     - `--json`：以 JSON 格式输出
     - `--long`：输出额外信息
@@ -168,7 +172,7 @@ npm install npm@2 -g
     - `--prod[uction]`：仅输出 `dependencies` 中的依赖
     - `--dev`：仅输出 `devDependencies` 中的依赖
 
-3. 别名：`list`、`la`、`ll`
+3.  别名：`list`、`la`、`ll`
 
 #### npm adduser
 
@@ -180,28 +184,28 @@ npm adduser
 
 #### npm init
 
-1. 提问，然后产生一个 `package.json` 文件
+1.  提问，然后产生一个 `package.json` 文件
 
-    ```
-    npm init [-f|--force|-y|--yes]
-    ```
+     ```
+     npm init [-f|--force|-y|--yes]
+     ```
 
-2. 常用参数：
+2.  常用参数：
 
     - `-f, --force, -y, --yes`：使用默认的答案，不再提问
     - `--scope <scope>`：指定新模块的 scope，例如 `mtfe`
 
 #### npm publish
 
-1. 发布一个新的包，或一个包的新版本  
+1.  发布一个新的包，或一个包的新版本  
 
-    ```
-    npm publish [<tarball>|<folder>] [--tag <tag>] [--access <public|restricted>]
-    ```
+     ```
+     npm publish [<tarball>|<folder>] [--tag <tag>] [--access <public|restricted>]
+     ```
 
     > 如果没有 tarball 或 folder 被指定，则使用当前目录
 
-2. 常用参数：
+2.  常用参数：
 
     - `--tag <tag>`：给被发布的包注册指定的 tag，如果没有该参数，则默认使用 `latest`
 
@@ -243,36 +247,36 @@ npm deprecate <pkg>[@<version>] <message>
 
 #### npm view
 
-1. 显示一个包的详细信息
+1.  显示一个包的详细信息
 
-    ```
-    npm view [<@scope>/]<name>[@<version>] [<field>[.<subfield>]...]
-    ```
+     ```
+     npm view [<@scope>/]<name>[@<version>] [<field>[.<subfield>]...]
+     ```
 
     > `<field>` 和 `<subfield>` 表示输出信息中的字段
 
-2. 别名：`info`、`show`、`v`
+2.  别名：`info`、`show`、`v`
 
 #### npm link
 
 将一个本地目录中的模块符号链接至一个项目的依赖中，实现上述功能需要两步：
 
-1. 在模块目录中执行下面的命令，创建一个从全局依赖指向当前目录的符号链接
+1.  在模块目录中执行下面的命令，创建一个从全局依赖指向当前目录的符号链接
 
-    ```
-    npm link
-    ```
+     ```
+     npm link
+     ```
 
-    ```
-    /usr/local/Cellar/nvm/0.25.4/versions/node/v4.4.4/lib/node_modules/handgrip
-    -> /Users/Dylan/handgrip
-    ```
+     ```
+     /usr/local/Cellar/nvm/0.25.4/versions/node/v4.4.4/lib/node_modules/handgrip
+     -> /Users/Dylan/handgrip
+     ```
 
-2. 在其他目录中执行下面的命令，创建一个从局部依赖指向全局依赖的符号链接
+2.  在其他目录中执行下面的命令，创建一个从局部依赖指向全局依赖的符号链接
 
-    ```
-    npm link [<@scope>/]<pkg>[@<version>]
-    ```
+     ```
+     npm link [<@scope>/]<pkg>[@<version>]
+     ```
 
     > `[<@scope>/]<pkg>[@<version>]` 所表示已经执行了第一步的模块，或其所包含的版本
 
@@ -292,7 +296,7 @@ npm deprecate <pkg>[@<version>] <message>
     ```
     npm config set <key> <value> [-g|--global]
     npm set <key> <value> [-g|--global]
-    ```  
+    ```
 
     如果配置项的值阙如，将采用默认值 `true`。
 
@@ -313,13 +317,13 @@ npm deprecate <pkg>[@<version>] <message>
 
     ```
     npm config list
-    ```  
+    ```
 
 5. 在编辑器中打开配置文件
 
     ```
     npm config edit
-    ```  
+    ```
 
     使用 `--global` 来打开全局配置文件。
 
@@ -524,7 +528,7 @@ npm install
 
 ## 实用技巧
 
-### pacakge.json
+### package.json
 
 #### dependencies
 
@@ -788,85 +792,85 @@ npm 支持的生命周期脚本有：
 
 一个使用的🌰：
 
-1. 我们有模块 A：
+1.  我们有模块 A：
 
     ```js
-    {
-      "name": "A",
-      "version": "0.0.1",
-      "dependencies": {
-        "B": "<0.1.0"
-      }
-    }
+     {
+       "name": "A",
+       "version": "0.0.1",
+       "dependencies": {
+         "B": "<0.1.0"
+       }
+     }
     ```
 
-    模块 B：
+     模块 B：
 
     ```js
-    {
-      "name": "B",
-      "version": "0.0.1",
-      "dependencies": {
-        "C": "<0.1.0"
-      }
-    }
+     {
+       "name": "B",
+       "version": "0.0.1",
+       "dependencies": {
+         "C": "<0.1.0"
+       }
+     }
     ```
 
-    和模块 C：
+     和模块 C：
 
     ```js
-    {
-      "name": "C",
-      "version": "0.0.1"
-    }
+     {
+       "name": "C",
+       "version": "0.0.1"
+     }
     ```
 
-    这三个模块都只有 0.0.1 这一个版本。此时运行 `npm install A`，将会得到：
+     这三个模块都只有 0.0.1 这一个版本。此时运行 `npm install A`，将会得到：
 
-    ```
-    A@0.0.1
-    `-- B@0.0.1
-        `-- C@0.0.1
-    ```
+     ```
+     A@0.0.1
+     `-- B@0.0.1
+         `-- C@0.0.1
+     ```
 
-2. 如果模块 B 发布了 0.0.2 版本，此时运行 `npm install A`，将会得到：
+2.  如果模块 B 发布了 0.0.2 版本，此时运行 `npm install A`，将会得到：
 
-    ```
-    A@0.0.1
-    `-- B@0.0.2
-        `-- C@0.0.1
-    ```
+     ```
+     A@0.0.1
+     `-- B@0.0.2
+         `-- C@0.0.1
+     ```
 
-    但是模块 A 的作者希望安装原来的版本，那么他可以运行：
+     但是模块 A 的作者希望安装原来的版本，那么他可以运行：
 
-    ```
-    npm shrinkwrap
-    ```
+     ```
+     npm shrinkwrap
+     ```
 
-    然后在项目目录下得到了一个 `npm-shrinkwrap.json` 文件：
+     然后在项目目录下得到了一个 `npm-shrinkwrap.json` 文件：
 
     ```js
-    {
-      "name": "A",
-      "version": "0.0.1",
-      "dependencies": {
-        "B": {
-          "version": "0.0.1",
-          "from": "B@<0.1.0",
-          "resolved": "https://registry.npmjs.org/B/-/B-0.0.1.tgz",
-          "dependencies": {
-            "C": {
-              "version": "0.0.1",
-              "from": "C@<0.1.0",
-              "resolved": "https://registry.npmjs.org/C/-/C-0.0.1.tgz"
-            }
-          }
-        }
-      }
-    }
+     {
+       "name": "A",
+       "version": "0.0.1",
+       "dependencies": {
+         "B": {
+           "version": "0.0.1",
+           "from": "B@<0.1.0",
+           "resolved": "https://registry.npmjs.org/B/-/B-0.0.1.tgz",
+           "dependencies": {
+             "C": {
+               "version": "0.0.1",
+               "from": "C@<0.1.0",
+               "resolved": "https://registry.npmjs.org/C/-/C-0.0.1.tgz"
+             }
+           }
+         }
+       }
+     }
     ```
 
-    `npm shrinkwrap` 命令根据当前目录中的 node_modules 目录锁定了依赖版本号，此时再运行 `npm install`，该命令的行为将变为：
+     `npm shrinkwrap` 命令根据当前目录中的 node_modules 目录锁定了依赖版本号，此时再运行 `npm install`，该命令的行为将变为：
 
     1. 重新构造 `npm-shrinkwrap.json` 中描述的依赖树，如果一个依赖项中的 `resolved` 字段可用，则使用该字段获取依赖，否则使用 `version` 字段来获取依赖
     2. 以普通的方式安装 `npm-shrinkwrap.json` 中缺失的依赖
